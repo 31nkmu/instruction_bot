@@ -1,0 +1,8 @@
+bs4
+requests
+lxml
+selenium
+webdriver_manager
+fake-useragent
+aiogram
+python-decouple
