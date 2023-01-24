@@ -32,21 +32,24 @@ def search_data(
     ищет инструкцию по названию электроники и скачивает в пдф
     :param product_title: название электроники
     """
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    driver.get(url)
-    move = ActionChains(driver)
-    thumb = driver.find_element(By.XPATH, '//*[@id="js-rangeslider-js-0"]')
-    move.click_and_hold(thumb).move_by_offset(200, 0).release().perform()
-    input_ = driver.find_element(By.CLASS_NAME, 'search-input')
-    driver.implicitly_wait(3)
-    input_.send_keys(product_title)
-    input_.send_keys(Keys.ENTER)
-    element = driver.find_element(By.XPATH,
-                                  '/html/body/div[1]/div[2]/div[2]/div[1]/h3/a')
-    element.click()
-    pdf = driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[4]/span/a')
-    pdf.click()
-    time.sleep(10)
+    try:
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        driver.get(url)
+        move = ActionChains(driver)
+        thumb = driver.find_element(By.XPATH, '//*[@id="js-rangeslider-js-0"]')
+        move.click_and_hold(thumb).move_by_offset(200, 0).release().perform()
+        input_ = driver.find_element(By.CLASS_NAME, 'search-input')
+        driver.implicitly_wait(3)
+        input_.send_keys(product_title)
+        input_.send_keys(Keys.ENTER)
+        element = driver.find_element(By.XPATH,
+                                      '/html/body/div[1]/div[2]/div[2]/div[1]/h3/a')
+        element.click()
+        pdf = driver.find_element(By.XPATH, '/html/body/div[1]/div[3]/div[4]/span/a')
+        pdf.click()
+        time.sleep(10)
+    except:
+        pass
 
 #
 # file = glob.glob(f'{os.getcwd()}/pdf_files/*.pdf')
